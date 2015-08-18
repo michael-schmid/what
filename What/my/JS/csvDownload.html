@@ -1,11 +1,57 @@
-﻿<!doctype html>
-<html>
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Domemory: csvDownload</title>
+
+    <!-- Bootstrap -->
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
+    <div class="container">
 
-    <a href='#' onclick='downloadCSV({ filename: "stock-data.csv" });'>Download CSV</a>
+        <div class="page-header">
+            <h1>Client Side CSV Download</h1>
+        </div>
 
+        <div class="row">
+            <div class="col-md-10">
+                <h3>Download Attribute for link</h3>
+
+                <dl>
+                    <dt>Goal</dt>
+                    <dd>Provide a download option for a javascript object.</dd>
+                    <dt>Browser Support</dt>
+                    <dd>Chrome</dd>
+                    <dt>Resources</dt>
+                    <dd>http://halistechnology.com/2015/05/28/use-javascript-to-export-your-data-as-csv/</dd>
+                    <dd>http://davidwalsh.name/download-attribute</dd>
+                </dl>
+                <p>
+                    Works with Chrome
+                </p>
+
+                <a href='#' onclick='downloadCSV({ filename: "stock-data.csv" });'>Download CSV</a>
+
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+    <script src="/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="/Scripts/jsrender.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+
+  
     <script type="text/javascript">
         var stockData = [
             {
@@ -33,7 +79,7 @@
                 return null;
             }
 
-            columnDelimiter = args.columnDelimiter || ',';
+            columnDelimiter = args.columnDelimiter || ';';
             lineDelimiter = args.lineDelimiter || '\n';
 
             keys = Object.keys(data[0]);
@@ -71,11 +117,45 @@
             }
             data = encodeURI(csv);
 
+           
+           
             link = document.createElement('a');
-            link.setAttribute('href', data);
-            link.setAttribute('download', filename);
-            link.click();
+         
+
+            if (link.download !== undefined) {
+                // download attribute exist
+                link.setAttribute('href', data);
+                link.setAttribute('download', filename);
+                link.click();
+            } else if (navigator.msSaveBlob) {
+                // IE 10+
+
+                var csvData = new Array();
+                
+                stockData.forEach(function (item, index, array) {
+
+                    csvData.push(';"' + item.Symbol + '";"' + item.Company + ';' + item.Price);
+                });
+
+                var buffer = csvData.join("\n");
+                var blob = new Blob([buffer], {
+                    "type": "text/csv;charset=utf8;"
+                });
+                
+                link.setAttribute("href", "#");
+
+                link.addEventListener("click", function (event) {
+                    navigator.msSaveBlob(blob, filename)
+                }, false);
+            }
+             else {
+                // neither supported nor microsoft
+                alert("Nocal data download not supported in this browser!");
+            }
+
+
+
         }
     </script>
 </body>
-</html>  
+</html>

@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Domemory: csvDownload</title>
+
+    <!-- Bootstrap -->
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+
+        <div class="page-header">
+            <h1>Simulate Blocking UI Thread</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <a class="btn btn-info" role="button" href="http://ww.google.de">Goto Google</a>
+
+                <button id="checkbutton" type="button" class="btn btn-default bs-docs-activate-animated-progressbar">Check Button Click</button>
+                <div id="buttonClick"></div>
+
+                <ul id="ajaxResults">
+                </ul>
+
+                <dl>
+                    <dt>Resources</dt>
+                    
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <h2>Simulate local processing while waiting for ajax responses:</h2>
+                <ul id="processingTimer"></ul>
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+    <script src="/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="/Scripts/jsrender.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+      
+    <script type="text/javascript">
+
+        $('#checkbutton').on('click', function () {
+            $('#buttonClick').text('Clicked on check button at' + new Date());
+        });
+
+        var i = 0;
+        setInterval(function () {
+            i += 1;
+            var $response = $('<li>processing interval: ' + i +'</li>');
+            $('#processingTimer').append($response);
+            
+        }, 1000)
+        
+        runAjaxRequest();
+        runAjaxRequest();
+        runAjaxRequest();
+        runAjaxRequest();
+        runAjaxRequest();
+        runAjaxRequest();
+        runAjaxRequest();
+
+        function runAjaxRequest() {
+            var $response = $('<li><img src="../../Content/pics/progress.gif" />loading</li>');
+            $('#ajaxResults').append($response);
+
+            $.ajax({
+                type: "Get",
+                url: "http://infoapi.domemory.net/api/info/555/journal",
+                 contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    $response.text('Loaded objects: ' + msg.length);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+    </script>
+</body>
+</html>
