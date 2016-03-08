@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +10,6 @@
     <!-- Bootstrap -->
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
    
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -36,14 +36,18 @@
     <script src="/scripts/bootstrap.min.js"></script>
 
     <script>
-
         // Index data
         var exampleData = {
-
-            examples: [{
-                "Caption": "Traversing Data",
-                "Description": "Shows how to navigate in datastructure to render the data with templates.", "Url": "objectGraph.html"
-            }
+            examples: [
+                {
+                    "Caption": "Twitter Typeahead",
+                    "Description": "Setup of custom templates for the suggestions with jsrender templates. ",
+                    "Url": "withTypeahead.html"
+                }, {
+                    "Caption": "Traversing Data",
+                    "Description": "Shows how to navigate in datastructure to render the data with templates.",
+                    "Url": "objectGraph.html"
+                }
             ]
         };
 
@@ -55,7 +59,6 @@
 
         // Render
         $('#exampleTable').html($.render.examples(exampleData));
-
     </script>
 </body>
 </html>

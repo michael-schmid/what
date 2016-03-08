@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JS Render Typeahead</title>
+
+    <!-- Bootstrap -->
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/Scripts/jsrender.min.js"></script>
+
+    <script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+    <link href="http://twitter.github.io/typeahead.js/css/examples.css" rel="stylesheet" />
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+
+        <div class="page-header">
+            <h1>Twitter typeahead with jsRender</h1>
+          
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+
+                <!-- tempplate output -->
+                <div id="bloodhound">
+                    <input class="typeahead" type="text" placeholder="States of USA">
+                </div>
+
+                <script>
+                  
+
+                    $.templates.compile = $.templates;
+
+                    var localData = ['test1', 'test2', 'test3'];
+
+                    var localData = new Bloodhound({
+                        datumTokenizer: Bloodhound.tokenizers.obj.whitespace("value"),
+                        queryTokenizer: Bloodhound.tokenizers.whitespace,
+                        // create the obejct structure from the array
+                        // needed for the templates to access data!
+                        local: $.map(localData, function(item) {
+                            return { value: item };
+                        })
+                    });
+
+
+                    $("#bloodhound .typeahead").typeahead( {
+                        limit: 15,
+                        hint: true,
+                        highlight: true,
+                        minLength: 1},
+                        {
+                            name: "localData",
+                            source: localData,
+                            templates: {
+                                notFound: '<div class="empty-message"><strong>Result not found!</strong></div>',
+                                suggestion: $.templates.compile("<div style=\"font-weight:bold\">"
+                                            + "{{if 1=1}}{{:value}}lllll{{else}}No records located.{{/if}}"
+                                            + "</div>"),
+                                // with template string composition
+                                suggestionnnn: function (data) {
+                                    return "<div>" + data.value + "fuuuuuuck</div>";
+                                },
+                                footer: function (data) {
+                                   return '<div>Search for: ' + data.query + '</div>';
+                                }
+
+                            },
+                        });
+                    
+                        //remote: {
+                        //    url: "/Home/Lookup?term=%QUERY",
+                        //    maxParallelRequests: 2,
+                        //    beforeSend: function (jqXhr, settings) {
+                        //        var temp = String($("#txtTypeahead").val());
+                        //        if (temp.length > 3) {
+                        //            $("#txtTypeahead").addClass("LoadingBackground");
+                        //            return true;
+                        //        } else {
+                        //            return false;
+                        //        }
+                        //    },
+                        //    complete: function () {
+                        //    },
+                        //    filter: function (data) {
+                        //        $("#txtTypeahead").removeClass("LoadingBackground");
+                        //        // filter the returned data
+                        //        var ret = [];
+                        //        if (data != null && data.length > 0) {
+                        //            for (var i = 0; i <= data.length - 1; i++) {
+                        //                var item = data[i];
+                        //                ret.push({
+                        //                    value: item.Matter,
+                        //                    data: [item.Matter, item.Title],
+                        //                    hasData: item.Matter != null || item.Title != null
+                        //                });
+                        //            }
+                        //        } else {
+                        //            ret.push({ value: "", data: [], hasData: false });
+                        //        }
+                        //        return ret;
+                        //    },
+                        //    cache: true,
+                        //},
+                    
+                  
+
+
+                </script>
+            </div>
+          
+        </div>
+
+
+
+
+    </div> <!-- /container -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="scripts/bootstrap.min.js"></script>
+
+</body>
+</html>
