@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Typeahead Examples</title>
+
+    <!-- Bootstrap -->
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+   
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+
+        <div class="page-header">
+            <h1>RequireJS Examples</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+                <div id="exampleTable"></div>
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+    <script src="/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="/Scripts/jsrender.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+
+    <script>
+        // Index data
+        var exampleData = {
+            examples: [
+                {
+                    "Caption": "JQuery",
+                    "Description": "Setup requireJS with the typeahead / bloodhound modules.",
+                    "Url": "setupJQuery.html"
+                }, {
+                    "Caption": "Twitter Typeahead",
+                    "Description": "CSS for styling the typeahead.",
+                    "Url": "setupTypeahead.html"
+                }
+            ]
+        };
+
+        // compile the table template
+        $.templates({
+            examples: '<table class="table"><thead><tr><th>Name</th><th>Description</th></tr></thead>\
+                            <tbody>{{for examples}}<tr><td><a href="{{:Url}}">{{:Caption}}</td><td>{{:Description}}</td></tr>{{/for}}<tbody></table>'
+        });
+
+        // Render
+        $('#exampleTable').html($.render.examples(exampleData));
+    </script>
+</body>
+</html>
