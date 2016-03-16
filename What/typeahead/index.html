@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,9 +18,8 @@
 </head>
 <body>
     <div class="container">
-
         <div class="page-header">
-            <h1>JS Render Examples</h1>
+            <h1>Typeahead Examples</h1>
         </div>
 
         <div class="row">
@@ -35,30 +33,43 @@
     <script src="/Scripts/jsrender.min.js"></script>
     <script src="/scripts/bootstrap.min.js"></script>
 
-    <script>
-        // Index data
-        var exampleData = {
-            examples: [
-                {
-                    "Caption": "Twitter Typeahead",
-                    "Description": "Setup of custom templates for the suggestions with jsrender templates. ",
-                    "Url": "/myJSRender/withTypeahead.html"
-                }, {
-                    "Caption": "Design",
-                    "Description": "CSS for styling the typeahead.",
-                    "Url": "styles.html"
-                }
-            ]
-        };
+	<script>
+		// Index data
+		var	exampleData = {
+			examples: [
+				{
+					"Caption": "JSRender Templates",
+					"Description": "Setup of custom templates for the suggestions with jsrender templates. ",
+					"Url": "/myJSRender/withTypeahead.html"
+				}, {
+					"Caption": "Design",
+					"Description": "CSS for styling the typeahead.",
+					"Url": "styles.html"
+				}, {
+					"Caption": "Multiple Datasets",
+					"Description": "Shows how to display data from multiple data sets and grouping.",
+					"Url": "multipleDatasets.html"
+				}, {
+					"Caption": "Load from File",
+					"Description": "Demo how to prefetch data from a local .json file",
+					"Url": "loadDataFromFile.html"
+				},
+				{
+					"Caption": "Remote data",
+					"Description": "Implement the suggestions with remote data",
+					"Url": "remote.html"
+				}
+			]
+		};
 
-        // compile the table template
-        $.templates({
-            examples: '<table class="table"><thead><tr><th>Name</th><th>Description</th></tr></thead>\
-                            <tbody>{{for examples}}<tr><td><a href="{{:Url}}">{{:Caption}}</td><td>{{:Description}}</td></tr>{{/for}}<tbody></table>'
-        });
+		// compile the table template
+		$.templates({
+			examples: '<table class="table"><thead><tr><th>Name</th><th>Description</th></tr></thead>\
+						<tbody>{{for examples}}<tr><td><a href="{{:Url}}">{{:Caption}}</td><td>{{:Description}}</td></tr>{{/for}}<tbody></table>'
+		});
 
-        // Render
-        $('#exampleTable').html($.render.examples(exampleData));
+		// Render
+		$('#exampleTable').html($.render.examples(exampleData));
     </script>
 </body>
 </html>

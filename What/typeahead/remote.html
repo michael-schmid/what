@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>JS Render Typeahead</title>
+    <title>Typeahead Styling</title>
 
     <!-- Bootstrap -->
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
@@ -13,8 +13,7 @@
     <script src="/Scripts/jsrender.min.js"></script>
 
     <script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
-    <link href="http://twitter.github.io/typeahead.js/css/examples.css" rel="stylesheet" />
-    
+       
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -26,7 +25,7 @@
     <div class="container">
 
         <div class="page-header">
-            <h1>Twitter typeahead with jsRender</h1>
+            <h1>Remote Data Sets</h1>
           </div>
 
         <div class="row">
@@ -34,12 +33,18 @@
 
                 <!-- tempplate output -->
                 <div id="bloodhound">
-                    <input class="typeahead" type="text" placeholder="States of USA">
+                    <input class="typeahead" type="text" placeholder="Countries of the world">
                 </div>
+
+				<link href="css/typeaheadGray.css" rel="stylesheet" />
+
+                <style>             
+                </style>
 
                 <script>
   
                     $.templates.compile = $.templates;
+
 
                     var localData = ["Andorra", "United Arab Emirates", "Afghanistan", "Antigua and Barbuda", "Anguilla", "Albania", "Armenia", "Angola", "Antarctica", "Argentina",
                             "American Samoa", "Austria", "Australia", "Aruba", "Åland", "Azerbaijan", "Bosnia and Herzegovina", "Barbados", "Bangladesh", "Belgium", "Burkina Faso", "Bulgaria",
@@ -63,77 +68,55 @@
                             "Uzbekistan", "Vatican City", "Saint Vincent and the Grenadines", "Venezuela", "British Virgin Islands", "U.S. Virgin Islands", "Vietnam", "Vanuatu",
                             "Wallis and Futuna", "Samoa", "Kosovo", "Yemen", "Mayotte", "South Africa", "Zambia", "Zimbabwe"]
 
-
                     var localData = new Bloodhound({
-                        datumTokenizer: Bloodhound.tokenizers.obj.whitespace("value"),
+                        
+                        // use this to when the source is an array of objects
+                        // datumTokenizer: Bloodhound.tokenizers.obj.whitespace("value"),
+                        datumTokenizer: Bloodhound.tokenizers.whitespace,
+
                         queryTokenizer: Bloodhound.tokenizers.whitespace,
                         // create the obejct structure from the array
                         // needed for the templates to access data!
-                        local: $.map(localData, function(item) {
-                            return { value: item };
-                        })
+                        //local: $.map(localData, function(item) {
+                        //    return { value: item };
+                        //})
+
+                        // without templates just use the normal array:
+                        local: localData
                     });
 
 
-                    $("#bloodhound .typeahead").typeahead( {
-                        limit: 15,
-                        hint: true,
-                        highlight: true,
-                        minLength: 1},
-                        {
+                    var localData1 = new Bloodhound({
+
+                    	// use this to when the source is an array of objects
+                    	// datumTokenizer: Bloodhound.tokenizers.obj.whitespace("value"),
+                    	datumTokenizer: Bloodhound.tokenizers.whitespace,
+
+                    	queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    	// create the obejct structure from the array
+                    	// needed for the templates to access data!
+                    	//local: $.map(localData, function(item) {
+                    	//    return { value: item };
+                    	//})
+
+                    	// without templates just use the normal array:
+                    	local: localData
+                    });
+
+                    $("#bloodhound .typeahead").typeahead({
+							limit: 15,
+							hint: true,
+							highlight: true,
+							minLength: 1
+						},	{
                             name: "localData",
-                            source: localData,
-                            templates: {
-                                // notFound: '<div class="empty-message"><strong>Result not found!</strong></div>',
-
-
-                                // use a js Render Template for the suggestions
-                                suggestion1: $.templates.compile("<div>{{:value}}</div>"),
-                                // with template string composition
-                                suggestion: function (data) {
-                                    return "<div>" + data.value + "</div>";
-                                },
-                                footer: function (data) {
-                                   return '<div>Search for: ' + data.query + '</div>';
-                                }
-
-                            },
-                        });
+							source: localData
+						},	{
+							name: "localData",
+							source: localData
+						});
                     
-                        //remote: {
-                        //    url: "/Home/Lookup?term=%QUERY",
-                        //    maxParallelRequests: 2,
-                        //    beforeSend: function (jqXhr, settings) {
-                        //        var temp = String($("#txtTypeahead").val());
-                        //        if (temp.length > 3) {
-                        //            $("#txtTypeahead").addClass("LoadingBackground");
-                        //            return true;
-                        //        } else {
-                        //            return false;
-                        //        }
-                        //    },
-                        //    complete: function () {
-                        //    },
-                        //    filter: function (data) {
-                        //        $("#txtTypeahead").removeClass("LoadingBackground");
-                        //        // filter the returned data
-                        //        var ret = [];
-                        //        if (data != null && data.length > 0) {
-                        //            for (var i = 0; i <= data.length - 1; i++) {
-                        //                var item = data[i];
-                        //                ret.push({
-                        //                    value: item.Matter,
-                        //                    data: [item.Matter, item.Title],
-                        //                    hasData: item.Matter != null || item.Title != null
-                        //                });
-                        //            }
-                        //        } else {
-                        //            ret.push({ value: "", data: [], hasData: false });
-                        //        }
-                        //        return ret;
-                        //    },
-                        //    cache: true,
-                        //},
+                   
             
                 </script>
             </div>
