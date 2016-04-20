@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet/less" type="text/css" href="../Code52/metro.less" />
+
+  
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+
+        
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="pivot-item">
+                    <h3>goals</h3>
+                    <p>These are some of the goals we want to achieve with code52:</p>
+
+                    <ul>
+                        <li>introduce developers to open-source projects and help them learn the ropes</li>
+                        <li>contribute to projects across a range of technologies</li>
+                        <li>let contributors have a say in what we do each week</li>
+                    </ul>
+
+                    <p>The current organisers of code52 are <a href="http://twitter.com/tobin">Andrew Tobin</a>, <a href="http://twitter.com/shiftkey">Brendan Forster</a> and <a href="http://twitter.com/aeoth">Paul Jenkins</a>.</p>
+                </div>
+
+                <div class="pivot-item">
+                    <h3>what can I do?</h3>
+                    The easiest way to get started is to dive straight in:
+
+                    <div class="details">
+                        <ul>
+                            <li><a id="suggest" href="http://code52.uservoice.com">suggest a project</a></li>
+                            <li><a href="http://jabbr.net/#/rooms/code52">chatroom</a></li>
+                            <li><a href="http://twitter.com/code_52">twitter</a></li>
+                            <li><a href="/projects.html">contribute to a previous project</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pivot-item">
+                    <h3>past</h3>
+						Some of our recent work
+
+                    </div>
+                    <div style="clear:both">&nbsp;</div>
+                </div>
+
+                <div class="pivot-item">
+                    <h3>links</h3>
+                    For those hungry for more information:
+
+                    <div class="details">
+                        <ul>
+                            <li><a href="/blog.html">Blog Feed</a></li>
+                            <li><a href="/contributing.html">How we use Git and GitHub</a></li>
+                            <li><!--<a href="/trello.html">-->How we use Trello (coming soon)<!--</a>--></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    
+        <script src="../Scripts/jsrender.min.js"></script>
+    
+   
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/scripts/bootstrap.min.js"></script>
+
+    <script src="Code52/jqMetro.js"></script>
+
+    <script>
+        var defaults = {
+            animationDuration: 350,
+            headerOpacity: 0.25,
+            fixedHeaders: false,
+            headerSelector: function (item) { return item.children("h3").first(); },
+            itemSelector: function (item) { return item.children(".pivot-item"); },
+            headerItemTemplate: function () { return $("<span class='header' />"); },
+            pivotItemTemplate: function () { return $("<div class='pivotItem' />"); },
+            itemsTemplate: function () { return $("<div class='items' />"); },
+            headersTemplate: function () { return $("<div class='headers' />"); },
+            controlInitialized: undefined,
+            selectedItemChanged: undefined
+        };
+
+        $(function () {
+            $("div.metro-pivot").metroPivot(defaults);
+         
+        });
+    </script>
+
+</body>
+</html>

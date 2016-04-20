@@ -36,6 +36,8 @@
                     <input class="typeahead" type="text" placeholder="Countries of the world">
                 </div>
 
+				<div id="searchResult"></div>
+
 				<link href="css/typeaheadGray.css" rel="stylesheet" />
 
                 <style>             
@@ -114,10 +116,14 @@
 						},	{
 							name: "localData",
 							source: localData
+						}).on('typeahead:selected', function (event, selection) {
+
+							// the second argument has the info you want
+							$("#searchResult").text("You selected: " + selection);
+
+							// clearing the selection requires a typeahead method
+							// $(this).typeahead('setQuery', '');
 						});
-                    
-                   
-            
                 </script>
             </div>
         </div>

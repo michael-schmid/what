@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Domemory: uiBlocking</title>
+
+    <!-- Bootstrap -->
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+
+        <div class="page-header">
+            <h1>Transform an array with objects to a new array containing the object values</h1>
+        </div>
+
+        <form action="/">
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Input Data</h2>
+                <div id="arInput"></div>
+
+                <h2>Transformed Data</h2>
+                <div id="arResult"></div>
+                <dl>
+                    <dt>Resources</dt>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+    <script src="/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="/Scripts/jsrender.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+      
+    <script type="text/javascript">
+
+        var arInput = [
+            { "Date": "2015-01-01", "Value1": 1, "Value2": 2 },
+            { "Date": "2015-02-01", "Value1": 1, "Value2": 2 },
+            { "Date": "2015-03-01", "Value1": 1, "Value2": 2 }
+        ];
+        var arResult = [];
+
+        // output the result
+        $('#arInput').text(JSON.stringify(arInput));
+        
+        for (var i = 0; i < arInput.length; i++) {
+            var ar = [];
+
+            var propCount = 0;
+            var firstValue = "";
+
+            for (var prop in arInput[i]) {
+              
+                if (propCount > 0) {
+                    valAr = [];
+                    valAr.push(firstValue, arInput[i][prop]);
+                    ar.push(valAr);
+                } 
+                else {
+                    // get the 1st value
+                    firstValue = arInput[i][prop];
+                }
+                propCount += 1;
+            }
+            arResult.push(ar);
+        }
+        // output the result
+        $('#arResult').text(JSON.stringify(arResult));
+
+        var newArray = [
+            [{ "Date": "2015-01-01", "Key": "Value1", "Value": 1 }, { "Date": "2015-01-01", "Key": "Value2", "Value": 2 }],
+            [{ "Date": "2015-02-01", "Key": "Value1", "Value": 1 }, { "Date": "2015-01-01", "Key": "Value2", "Value": 2 }],
+            [{ "Date": "2015-03-01", "Key": "Value1", "Value": 1 }, { "Date": "2015-01-01", "Key": "Value2", "Value": 2 }]
+        ];
+        /* 
+            Wished Result
+        */
+    </script>
+</body>
+</html>

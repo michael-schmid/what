@@ -10,6 +10,7 @@
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/Scripts/jsrender.min.js"></script>
 
     <script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
        
@@ -24,48 +25,61 @@
     <div class="container">
 
         <div class="page-header">
-            <h1>Load Data from external File</h1>
+            <h1>Get selection and do something</h1>
           </div>
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-8">
 
-				<h2>Load data from JSON File</h2>
-				<p>With prefetch the file is only fetched once</p>
+				<h3>Catch select event and do something</h3>
 
-				<!-- tempplate output -->
-				<div id="bloodhound">
-					<input class="typeahead" type="text" placeholder="Football clubs of germany">
-				</div>
+                <!-- tempplate output -->
+                <div id="bloodhound">
+                    <input class="typeahead" type="text" placeholder="Countries of the world">
+                </div>
 
 				<!-- Get the typeahead styling -->
 				<link href="css/typeaheadGray.css" rel="stylesheet" />
 
-				<!-- Load local data for the demo -->
-				<script type="text/javascript" src="dataStates.js"></script>
-
-                <script>
-					var teams = new Bloodhound({
-
+				<script>
+					var states = new Bloodhound({
 						// use this to when the source is an array of objects
 						datumTokenizer: Bloodhound.tokenizers.obj.whitespace("name"),
 						queryTokenizer: Bloodhound.tokenizers.whitespace,
-						prefetch: "dataTeams.json"
+						prefetch: "dataStates.json"
+                    });
+
+					var domain = new Bloodhound({
+						// use this to when the source is an array of objects
+						datumTokenizer: Bloodhound.tokenizers.obj.whitespace("domain"),
+						queryTokenizer: Bloodhound.tokenizers.whitespace,
+						prefetch: "dataStates.json"
 					});
-					
+
 					$("#bloodhound .typeahead").typeahead({
 						limit: 15,
 						hint: true,
 						highlight: true,
 						minLength: 1
 					}, {
-						name: "teams",
-						display: "name",
-						source: teams
+						name: "states",
+						display: "name",			// reference to the property
+						source: states
+					},	{
+						name: "domain",
+						display: "topLevelDomain",			// reference to the property
+						source: domain
+					}).on('typeahead:selected', function (event, selection) {
+
+						// the second argument has the info you want
+						alert(selection.value);
+
+						// clearing the selection requires a typeahead method
+						$(this).typeahead('setQuery', '');
 					});
-                </script>
-            </div>
-        </div>
+				</script>
+				</div>
+			</div>
     </div> <!-- /container -->
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -73,7 +87,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="scripts/bootstrap.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
 
 </body>
 </html>

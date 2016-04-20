@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +9,7 @@
     <!-- Bootstrap -->
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
    
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -19,9 +19,11 @@
 </head>
 <body>
     <div class="container">
+            
+        <a href="http://what.domemory.net/bootstrap/">what.domemory.net/bootstrap</a>
 
         <div class="page-header">
-            <h1>JS Render Examples</h1>
+            <h1>Boostrap Examples</h1>
         </div>
 
         <div class="row">
@@ -36,19 +38,23 @@
     <script src="/scripts/bootstrap.min.js"></script>
 
     <script>
+
         // Index data
         var exampleData = {
             examples: [
+            {
+                "Caption": "Navigation",
+                "Description": "bootstrap Nav Bar", "Url": "nav.html"
+            },
                 {
-                    "Caption": "Twitter Typeahead",
-                    "Description": "Setup of custom templates for the suggestions with jsrender templates. ",
-                    "Url": "withTypeahead.html"
-                }, {
-                    "Caption": "Traversing Data",
-                    "Description": "Shows how to navigate in datastructure to render the data with templates.",
-                    "Url": "objectGraph.html"
-                }
-            ]
+                "Caption": "Bootstrap 4 Template",
+                "Description": "Scaffolding Page with CDN Links", "Url": "bootstrap.html"
+            },
+            {
+                "Caption": "Bootstrap 4 Doc",
+                "Description": "Official Documentation", "Url": "http://v4-alpha.getbootstrap.com"
+            },
+           ]
         };
 
         // compile the table template
@@ -56,8 +62,10 @@
             examples: '<table class="table"><thead><tr><th>Name</th><th>Description</th></tr></thead>\
                             <tbody>{{for examples}}<tr><td><a href="{{:Url}}">{{:Caption}}</td><td>{{:Description}}</td></tr>{{/for}}<tbody></table>'
         });
+
         // Render
         $('#exampleTable').html($.render.examples(exampleData));
+
     </script>
 </body>
 </html>

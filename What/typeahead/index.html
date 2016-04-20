@@ -4,11 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Typeahead Examples</title>
-
+    <title>Typeahead Knowledte Collection</title>
     <!-- Bootstrap -->
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
    
+	<script src="/Scripts/jquery-1.9.1.min.js"></script>
+	<script src="/Scripts/jsrender.min.js"></script>
+	<script src="/scripts/bootstrap.min.js"></script>
+	
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -22,16 +25,19 @@
             <h1>Typeahead Examples</h1>
         </div>
 
-        <div class="row">
-            <div class="col-md-10">
-                <div id="exampleTable"></div>
-            </div>
-        </div>
-    </div> <!-- /container -->
+		<div class="row">
+			<div class="col-md-10">
+				
+			</div>
+		</div>
 
-    <script src="/Scripts/jquery-1.9.1.min.js"></script>
-    <script src="/Scripts/jsrender.min.js"></script>
-    <script src="/scripts/bootstrap.min.js"></script>
+		<div class="row">
+			<div class="col-md-10">
+				<div id="exampleTable"></div>
+			</div>
+		</div>
+	</div> <!-- /container -->
+	
 
 	<script>
 		// Index data
@@ -41,7 +47,11 @@
 					"Caption": "JSRender Templates",
 					"Description": "Setup of custom templates for the suggestions with jsrender templates. ",
 					"Url": "/myJSRender/withTypeahead.html"
-				}, {
+				},	{
+					"Caption": "Local Serach Data",
+					"Description": "Locally defined search data in an array",
+					"Url": "localData.html"
+				}, 	{
 					"Caption": "Design",
 					"Description": "CSS for styling the typeahead.",
 					"Url": "styles.html"
@@ -53,12 +63,7 @@
 					"Caption": "Load from File",
 					"Description": "Demo how to prefetch data from a local .json file",
 					"Url": "loadDataFromFile.html"
-				},
-				{
-					"Caption": "Remote data",
-					"Description": "Implement the suggestions with remote data",
-					"Url": "remote.html"
-				}
+				}				
 			]
 		};
 
